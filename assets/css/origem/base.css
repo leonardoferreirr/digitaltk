@@ -1,0 +1,616 @@
+@import url("fontes.css");
+
+/* ---------------------------------------------------------------
+   Digital TK — base compartilhada entre o site e a landing page.
+   Amarelo #ffcc00 vem da marca. Sobre o preto ele da 13:1 de
+   contraste, entao aqui ele pode ser texto; sobre branco da 1,5:1
+   e nunca deve ser usado assim.
+   --------------------------------------------------------------- */
+
+:root {
+  --amarelo: #ffcc00;
+  --amarelo-2: #ffde59;
+  --amarelo-3: #e6b800;
+
+  --preto: #060606;
+  --carvao: #0f0f0f;
+  --carvao-2: #161616;
+  --linha: rgba(255, 255, 255, 0.11);
+  --linha-2: rgba(255, 255, 255, 0.06);
+
+  --branco: #f6f6f4;
+  --cinza: #a3a3a1;
+  --cinza-2: #8d8d8a;
+
+  --sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --w: min(1280px, 100% - 3rem);
+  --curva: cubic-bezier(0.22, 1, 0.36, 1);
+  --alt-topo: 76px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--preto);
+  color: var(--branco);
+  font-family: var(--sans);
+  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.08rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.env {
+  width: var(--w);
+  margin-inline: auto;
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--amarelo);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* --- Tipografia ------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+
+.amarelo {
+  color: var(--amarelo);
+}
+
+.apagado {
+  color: var(--cinza);
+}
+
+.titulo-xl {
+  font-size: clamp(2.3rem, 1.25rem + 4.1vw, 4.6rem);
+}
+
+.titulo-g {
+  font-size: clamp(2.1rem, 1.2rem + 3.9vw, 4.4rem);
+}
+
+.titulo-m {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.2rem);
+}
+
+
+
+:root {
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12'%3E%3Cpath d='M1 1l5 5-5 5M9 1l5 5-5 5M17 1l5 5-5 5' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.texto {
+  color: var(--cinza);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.14rem);
+  max-width: 46ch;
+}
+
+/* --- Botoes ------------------------------------------------------ */
+
+.btn {
+  --fundo: var(--amarelo);
+  --cor: #0a0a0a;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 1.05rem 1.9rem;
+  background: var(--fundo);
+  color: var(--cor);
+  border: 0;
+  border-radius: 999px;
+  font: 600 0.86rem/1 var(--sans);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.35s var(--curva), transform 0.5s var(--curva),
+    box-shadow 0.4s var(--curva);
+}
+
+/* O preenchimento sobe de baixo em vez de trocar a cor de chofre. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--branco);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--curva);
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+}
+
+.btn:hover {
+  box-shadow: 0 14px 40px -16px rgba(255, 204, 0, 0.5);
+}
+
+.btn svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  transition: transform 0.45s var(--curva);
+}
+
+.btn:hover svg {
+  transform: translateX(4px);
+}
+
+.btn--vazado {
+  --fundo: transparent;
+  --cor: var(--branco);
+  box-shadow: inset 0 0 0 1px var(--linha);
+}
+
+.btn--vazado::before {
+  background: var(--amarelo);
+}
+
+.btn--vazado:hover {
+  --cor: #0a0a0a;
+  box-shadow: inset 0 0 0 1px var(--amarelo),
+    0 14px 40px -16px rgba(255, 204, 0, 0.45);
+}
+
+/* --- Cabecalho ---------------------------------------------------- */
+
+.topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  transition: background-color 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.topo.fixo {
+  background: rgba(6, 6, 6, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--linha-2);
+}
+
+.topo__grade {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: var(--alt-topo);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  flex: none;
+}
+
+/* O lockup original é preto sobre transparente. Usado como máscara, ele
+   vira a forma e toma a cor da marca, em vez de sumir no fundo escuro. */
+.marca__sinal {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  background: var(--amarelo);
+  -webkit-mask: url("../logos/tk-sinal.webp") center / contain no-repeat;
+  mask: url("../logos/tk-sinal.webp") center / contain no-repeat;
+  transition: background-color 0.35s;
+}
+
+.marca:hover .marca__sinal {
+  background: var(--branco);
+}
+
+.marca__nome {
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.nav a {
+  position: relative;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cinza);
+  padding-block: 0.4rem;
+  transition: color 0.3s;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--amarelo);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--curva);
+}
+
+.nav a:hover {
+  color: var(--branco);
+}
+
+.nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.topo__btn {
+  flex: none;
+}
+
+.topo__btn .btn {
+  padding: 0.82rem 1.4rem;
+  font-size: 0.72rem;
+}
+
+.menu-btn {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--branco);
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-btn span {
+  display: block;
+  width: 24px;
+  height: 1.6px;
+  margin: 5.5px auto;
+  background: currentColor;
+  transition: transform 0.4s var(--curva), opacity 0.25s;
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7.1px) rotate(45deg);
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7.1px) rotate(-45deg);
+}
+
+/* --- Barra de progresso do scroll --------------------------------- */
+
+.progresso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--amarelo);
+  z-index: 90;
+  will-change: transform;
+}
+
+/* --- Secoes ------------------------------------------------------- */
+
+.secao {
+  position: relative;
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--alt-topo) + 1rem);
+}
+
+.cabeca {
+  max-width: 58rem;
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+}
+
+
+.cabeca .texto {
+  margin-top: 1.5rem;
+}
+
+/* --- Marquise ----------------------------------------------------- */
+
+.marquise {
+  --vao: 3.5rem;
+  overflow: hidden;
+  border-block: 1px solid var(--linha-2);
+  padding-block: 1.15rem;
+  background: var(--carvao);
+}
+
+.marquise__trilho {
+  display: flex;
+  align-items: center;
+  gap: var(--vao);
+  width: max-content;
+  animation: correr var(--duracao, 40s) linear infinite;
+}
+
+.marquise:hover .marquise__trilho {
+  animation-play-state: paused;
+}
+
+@keyframes correr {
+  to {
+    transform: translateX(calc(-50% - var(--vao) / 2));
+  }
+}
+
+.marquise__item {
+  display: flex;
+  align-items: center;
+  gap: var(--vao);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  white-space: nowrap;
+  flex: none;
+}
+
+.marquise__item::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amarelo);
+  flex: none;
+}
+
+/* --- Reveal ------------------------------------------------------- */
+
+/* Cada linha do titulo sobe de dentro de uma janela que a corta. */
+.linha {
+  display: block;
+  overflow: hidden;
+}
+
+.linha > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s var(--curva);
+  transition-delay: var(--atraso, 0s);
+}
+
+.dentro .linha > span,
+.linha.dentro > span {
+  transform: translateY(0);
+}
+
+.sobe {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s var(--curva), transform 0.9s var(--curva);
+  transition-delay: var(--atraso, 0s);
+}
+
+.sobe.dentro {
+  opacity: 1;
+  transform: none;
+}
+
+/* Imagem que se revela por mascara, em vez de so aparecer.
+   O clip-path fica na IMAGEM, nunca no elemento observado: clip-path no
+   proprio alvo zera a area de intersecao e o IntersectionObserver jamais
+   dispara, entao a imagem ficaria escondida para sempre. */
+.revela {
+  position: relative;
+  overflow: hidden;
+}
+
+.revela img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.14);
+  transition: clip-path 1.25s var(--curva), transform 1.5s var(--curva);
+  transition-delay: var(--atraso, 0s);
+}
+
+.revela.dentro img {
+  clip-path: inset(0 0 0 0);
+  transform: scale(1);
+}
+
+/* --- Rodape ------------------------------------------------------- */
+
+.rodape {
+  border-top: 1px solid var(--linha-2);
+  padding-block: clamp(3rem, 2rem + 3vw, 5rem) 2rem;
+  background: var(--carvao);
+}
+
+.rodape__grade {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--linha-2);
+}
+
+.rodape__sobre {
+  margin-top: 1.2rem;
+  color: var(--cinza);
+  font-size: 0.95rem;
+  max-width: 32rem;
+}
+
+.rodape h3 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--cinza-2);
+  margin-bottom: 1.2rem;
+}
+
+.rodape ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rodape li a {
+  text-decoration: none;
+  color: var(--cinza);
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.rodape li a:hover {
+  color: var(--amarelo);
+}
+
+.rodape__fim {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+  justify-content: space-between;
+  padding-top: 1.8rem;
+  font-size: 0.82rem;
+  color: var(--cinza-2);
+}
+
+/* --- Responsivo --------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .nav,
+  .topo__btn {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .topo.aberto .nav {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--carvao);
+    border-bottom: 1px solid var(--linha);
+    padding: 0.5rem 1.5rem 1.4rem;
+  }
+
+  .topo.aberto .nav a {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--linha-2);
+    font-size: 0.88rem;
+  }
+
+  .rodape__grade {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
+  }
+
+  .rodape__grade > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  :root {
+    --w: min(1280px, 100% - 2.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .linha > span,
+  .sobe {
+    transform: none;
+    opacity: 1;
+  }
+
+  .revela img {
+    clip-path: none;
+    transform: none;
+  }
+}

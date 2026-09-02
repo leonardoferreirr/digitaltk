@@ -1,0 +1,427 @@
+@import url("base.css");
+
+/* ---------------------------------------------------------------
+   Digital TK — landing page da história, montada sobre o briefing.
+   Mesma identidade do site; o que muda é o ritmo, que aqui é narrativo.
+   --------------------------------------------------------------- */
+
+/* --- Hero ---------------------------------------------------------- */
+
+.lp-hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--alt-topo) + 3.5rem) 4rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.lp-hero__foto {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.lp-hero__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.lp-hero__veu {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+      100deg,
+      rgba(6, 6, 6, 0.97) 0%,
+      rgba(6, 6, 6, 0.9) 38%,
+      rgba(6, 6, 6, 0.62) 68%,
+      rgba(6, 6, 6, 0.42) 100%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 82% 30%,
+      rgba(255, 204, 0, 0.16),
+      transparent 62%
+    );
+}
+
+.lp-hero__grade {
+  position: relative;
+}
+
+.lp-hero__grade > * {
+  max-width: 54rem;
+}
+
+.lp-hero h1 {
+  font-size: clamp(2.3rem, 1.2rem + 4.3vw, 4.8rem);
+}
+
+.lp-hero .texto {
+  margin-top: 2rem;
+  max-width: 48ch;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.lp-hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.6rem;
+}
+
+/* --- Capítulos ----------------------------------------------------- */
+
+/* Uma linha vertical costura os capítulos; o traço amarelo dentro dela
+   acompanha o quanto da história já passou. */
+.linha-tempo {
+  position: relative;
+}
+
+.linha-tempo::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--linha-2);
+}
+
+.linha-tempo__marca {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  background: var(--amarelo);
+  transform-origin: top;
+  transform: scaleY(0);
+  height: 100%;
+  will-change: transform;
+}
+
+.capitulo {
+  position: relative;
+  padding: clamp(3.5rem, 2.5rem + 4vw, 6.5rem) 0
+    clamp(3.5rem, 2.5rem + 4vw, 6.5rem) clamp(1.5rem, 1rem + 3vw, 4rem);
+}
+
+.capitulo__par {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  align-items: center;
+}
+
+.capitulo__par--invertido > *:first-child {
+  order: 2;
+}
+
+.capitulo h2 {
+  margin-bottom: 1.6rem;
+}
+
+.capitulo .texto {
+  max-width: 52ch;
+}
+
+.capitulo .texto p + p {
+  margin-top: 1.1rem;
+}
+
+.capitulo__acao {
+  margin-top: 2.2rem;
+}
+
+.moldura {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--carvao-2);
+}
+
+.moldura--larga {
+  aspect-ratio: 4 / 3;
+}
+
+/* Marcador de foto que ainda não veio do cliente. */
+.aguarda {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.7rem;
+  text-align: center;
+  padding: 2rem;
+  color: var(--cinza-2);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  border: 1px dashed var(--linha);
+  border-radius: inherit;
+}
+
+.aguarda svg {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto;
+  opacity: 0.5;
+}
+
+/* --- Segmentos ------------------------------------------------------ */
+
+.segmentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.segmento {
+  --cor: var(--carvao-2);
+  --tinta: var(--branco);
+  padding: 1.7rem 1.5rem 1.9rem;
+  background: var(--cor);
+  color: var(--tinta);
+  border-radius: 16px;
+  border: 1px solid var(--linha-2);
+  transition: transform 0.5s var(--curva);
+}
+
+.segmento:hover {
+  transform: translateY(-5px);
+}
+
+.segmento--amarelo {
+  --cor: #ffcc00;
+  --tinta: #0a0a0a;
+  border-color: transparent;
+}
+
+.segmento--roxo {
+  --cor: #6d4aff;
+  --tinta: #fff;
+  border-color: transparent;
+}
+
+.segmento--coral {
+  --cor: #ff5c39;
+  --tinta: #0a0a0a;
+  border-color: transparent;
+}
+
+.segmento--turquesa {
+  --cor: #12d8c4;
+  --tinta: #05201d;
+  border-color: transparent;
+}
+
+.segmento h3 {
+  font-size: 1.18rem;
+  margin-bottom: 0.6rem;
+}
+
+.segmento p {
+  font-size: 0.93rem;
+  opacity: 0.78;
+}
+
+/* --- Formulário ------------------------------------------------------ */
+
+.contato {
+  background: var(--carvao);
+  border-top: 1px solid var(--linha-2);
+}
+
+.contato__grade {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  align-items: start;
+}
+
+.formulario {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+  background: var(--carvao-2);
+  border: 1px solid var(--linha-2);
+  border-radius: 20px;
+}
+
+.dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.campo {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.campo label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cinza-2);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.9rem 1.05rem;
+  background: var(--preto);
+  border: 1px solid var(--linha);
+  border-radius: 11px;
+  color: var(--branco);
+  font: 400 1rem/1.5 var(--sans);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.campo textarea {
+  min-height: 128px;
+  resize: vertical;
+}
+
+.campo select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a3a3a1' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.05rem center;
+  background-size: 12px;
+  padding-right: 2.6rem;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--amarelo);
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.16);
+}
+
+/* A mensagem de erro só aparece depois que o campo foi tocado, para o
+   formulário não nascer todo vermelho. */
+.campo .erro {
+  font-size: 0.8rem;
+  color: #ff8168;
+  display: none;
+}
+
+.campo.invalido input,
+.campo.invalido select,
+.campo.invalido textarea {
+  border-color: #ff8168;
+}
+
+.campo.invalido .erro {
+  display: block;
+}
+
+.formulario .btn {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.recado {
+  display: none;
+  padding: 1.1rem 1.3rem;
+  border-radius: 12px;
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid rgba(255, 204, 0, 0.32);
+  font-size: 0.94rem;
+}
+
+.recado.aparece {
+  display: block;
+}
+
+.contato__lado .texto {
+  margin-top: 1.6rem;
+}
+
+.atalhos {
+  list-style: none;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.atalhos a {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.05rem 1.3rem;
+  border: 1px solid var(--linha-2);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: border-color 0.35s, transform 0.45s var(--curva);
+}
+
+.atalhos a:hover {
+  border-color: var(--amarelo);
+  transform: translateX(4px);
+}
+
+.atalhos svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--amarelo);
+}
+
+.atalhos b {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.atalhos span {
+  font-size: 0.85rem;
+  color: var(--cinza-2);
+}
+
+/* --- Responsivo ------------------------------------------------------- */
+
+@media (max-width: 1020px) {
+  .capitulo__par,
+  .contato__grade {
+    grid-template-columns: 1fr;
+  }
+
+  .capitulo__par--invertido > *:first-child {
+    order: 0;
+  }
+
+  .moldura {
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .dupla {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-hero__acoes .btn {
+    width: 100%;
+  }
+
+  .linha-tempo::before,
+  .linha-tempo__marca {
+    display: none;
+  }
+
+  .capitulo {
+    padding-left: 0;
+  }
+}

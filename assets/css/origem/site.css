@@ -1,0 +1,545 @@
+@import url("base.css");
+
+/* ---------------------------------------------------------------
+   Digital TK — seções do site institucional.
+   --------------------------------------------------------------- */
+
+/* --- Hero --------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--alt-topo) + 3rem) 3.5rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Malha de pontos que respira atras do titulo. */
+.hero__malha {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 130%;
+  z-index: -2;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 204, 0, 0.42) 1px,
+    transparent 1.4px
+  );
+  background-size: 30px 30px;
+  -webkit-mask: radial-gradient(
+    ellipse 62% 58% at 70% 42%,
+    #000 5%,
+    transparent 68%
+  );
+  mask: radial-gradient(ellipse 62% 58% at 70% 42%, #000 5%, transparent 68%);
+  opacity: 0.75;
+  animation: respira 9s ease-in-out infinite;
+}
+
+@keyframes respira {
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+.hero__brilho {
+  position: absolute;
+  top: -30%;
+  right: -18%;
+  width: min(900px, 90vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  z-index: -3;
+  background: radial-gradient(
+    circle,
+    rgba(255, 204, 0, 0.14),
+    rgba(255, 204, 0, 0.04) 42%,
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.hero__grade {
+  position: relative;
+}
+
+.hero h1 {
+  max-width: 17ch;
+}
+
+.hero__texto {
+  margin-top: 2rem;
+  max-width: 44ch;
+}
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.6rem;
+}
+
+/* Faixa de numeros no pe do hero. */
+.hero__base {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 3.5rem;
+  margin-top: clamp(2.2rem, 1.5rem + 2.4vw, 3.4rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--linha-2);
+}
+
+.dado__n {
+  display: block;
+  font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.7rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--amarelo);
+  font-variant-numeric: tabular-nums;
+}
+
+.dado__r {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cinza-2);
+  line-height: 1.4;
+}
+
+
+
+
+/* --- Serviços: titulo preso, cartoes correndo --------------------- */
+
+.servicos {
+  background: var(--carvao);
+  border-block: 1px solid var(--linha-2);
+}
+
+.duo {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: start;
+}
+
+.duo__preso {
+  position: sticky;
+  top: calc(var(--alt-topo) + 3.5rem);
+}
+
+.pilha {
+  display: grid;
+  gap: 1.15rem;
+}
+
+/* Cada frente tem a sua cor. O amarelo da marca fica com a primeira; as
+   outras tres sao de apoio e so aparecem aqui, para o preto e branco do
+   resto do site continuar carregando a identidade.
+   Todas foram checadas em contraste contra a propria cor de texto. */
+.cartao {
+  --cor: var(--carvao-2);
+  --tinta: var(--branco);
+  --suave: var(--cinza);
+  --borda: var(--linha-2);
+
+  position: relative;
+  padding: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+  background: var(--cor);
+  color: var(--tinta);
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.55s var(--curva), box-shadow 0.55s var(--curva);
+}
+
+.cartao--amarelo {
+  --cor: #ffcc00;
+  --tinta: #0a0a0a;
+  --suave: rgba(10, 10, 10, 0.72);
+  --borda: transparent;
+}
+
+.cartao--roxo {
+  --cor: #6d4aff;
+  --tinta: #ffffff;
+  --suave: rgba(255, 255, 255, 0.8);
+  --borda: transparent;
+}
+
+.cartao--coral {
+  --cor: #ff5c39;
+  --tinta: #0a0a0a;
+  --suave: rgba(10, 10, 10, 0.74);
+  --borda: transparent;
+}
+
+.cartao--turquesa {
+  --cor: #12d8c4;
+  --tinta: #05201d;
+  --suave: rgba(5, 32, 29, 0.76);
+  --borda: transparent;
+}
+
+/* Brilho que segue o ponteiro, claro no card colorido e quente no escuro. */
+.cartao::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.45s;
+  pointer-events: none;
+}
+
+.cartao:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.cartao:hover::after {
+  opacity: 1;
+}
+
+.cartao h3,
+.cartao p {
+  position: relative;
+  z-index: 1;
+}
+
+
+.cartao h3 {
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.65rem);
+  margin-bottom: 0.9rem;
+}
+
+.cartao p {
+  color: var(--suave);
+  font-size: 0.99rem;
+  max-width: 48ch;
+}
+
+.marcas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.marcas {
+  position: relative;
+  z-index: 1;
+}
+
+/* A borda da tag nasce da propria cor do card, entao ela funciona tanto
+   sobre o amarelo quanto sobre o roxo sem regra extra. */
+.marcas span {
+  padding: 0.42rem 0.85rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--suave);
+  opacity: 0.62;
+  transition: opacity 0.3s;
+}
+
+.cartao:hover .marcas span {
+  opacity: 1;
+}
+
+/* --- Thatiana ------------------------------------------------------ */
+
+.fundadora {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: center;
+}
+
+.retrato {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--carvao-2);
+}
+
+/* Bloco de cor que desliza e entrega a foto: a marca aparece antes
+   da pessoa. */
+.retrato__cortina {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--amarelo);
+  transform-origin: top;
+  transform: scaleY(1);
+  transition: transform 1.1s var(--curva);
+}
+
+.retrato.dentro .retrato__cortina {
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.retrato img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.retrato__selo {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 3;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  background: rgba(6, 6, 6, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--linha);
+}
+
+.retrato__selo b {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.retrato__selo span {
+  font-size: 0.74rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--amarelo);
+}
+
+.fundadora__texto p + p {
+  margin-top: 1.1rem;
+}
+
+/* --- Faixa do Google Partner --------------------------------------- */
+
+.parceiro {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+  align-items: center;
+  padding: clamp(1.8rem, 1.2rem + 2.5vw, 3rem);
+  border: 1px solid var(--linha);
+  border-radius: 20px;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 204, 0, 0.07),
+    transparent 55%
+  );
+}
+
+.parceiro img {
+  width: clamp(76px, 9vw, 108px);
+  border-radius: 14px;
+  background: #fff;
+  padding: 0.7rem;
+}
+
+.parceiro__lista {
+  list-style: none;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 0.7rem 1.6rem;
+}
+
+.parceiro__lista li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+  color: var(--cinza);
+}
+
+.parceiro__lista li::before {
+  content: "";
+  width: 14px;
+  height: 7px;
+  flex: none;
+  background: var(--amarelo);
+  -webkit-mask: var(--chevron) center / contain no-repeat;
+  mask: var(--chevron) center / contain no-repeat;
+}
+
+/* --- Espaço --------------------------------------------------------- */
+
+.espaco__grade {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(150px, 20vw, 230px);
+  gap: 1rem;
+}
+
+.espaco__grade > *:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.espaco__grade > *:nth-child(2) {
+  grid-column: span 2;
+}
+
+.espaco__grade > *:nth-child(3) {
+  grid-column: span 2;
+}
+
+.espaco__grade .revela {
+  border-radius: 16px;
+  height: 100%;
+}
+
+/* --- Clientes -------------------------------------------------------- */
+
+.clientes__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--linha-2);
+  border: 1px solid var(--linha-2);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cliente {
+  display: grid;
+  place-content: center;
+  padding: 2rem 1.4rem;
+  background: var(--preto);
+  min-height: 118px;
+  transition: background-color 0.4s;
+}
+
+.cliente:hover {
+  background: var(--carvao-2);
+}
+
+/* As logos vieram do site antigo em cores variadas; o branco unifica
+   e a cor volta no hover. */
+.cliente img {
+  max-height: 46px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+  transition: opacity 0.4s, filter 0.4s;
+}
+
+.cliente:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+/* --- Chamada final ---------------------------------------------------- */
+
+.final {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.final__brilho {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  translate: -50% -50%;
+  width: min(1000px, 130vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 204, 0, 0.13),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+.final .env {
+  position: relative;
+}
+
+.final h2 {
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.final .texto {
+  margin: 1.8rem auto 0;
+  text-align: center;
+}
+
+.final__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-top: 2.6rem;
+}
+
+/* --- Responsivo -------------------------------------------------------- */
+
+@media (max-width: 1020px) {
+  .duo,
+  .fundadora {
+    grid-template-columns: 1fr;
+  }
+
+  .duo__preso {
+    position: static;
+  }
+
+  .retrato {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  .espaco__grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .espaco__grade > *:nth-child(1) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .parceiro {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__base {
+    gap: 1.8rem 2.5rem;
+  }
+
+  .espaco__grade {
+    grid-template-columns: 1fr;
+  }
+
+  .espaco__grade > * {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .hero__acoes .btn,
+  .final__acoes .btn {
+    width: 100%;
+  }
+}
