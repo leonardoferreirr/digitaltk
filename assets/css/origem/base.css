@@ -23,6 +23,7 @@
   --cinza-2: #8d8d8a;
 
   --sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --titulo: "Cocogoose", "Archivo", sans-serif;
 
   --w: min(1280px, 100% - 3rem);
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
@@ -95,10 +96,10 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-weight: 900;
-  line-height: 0.94;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+  font-family: var(--titulo);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 

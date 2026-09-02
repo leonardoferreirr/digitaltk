@@ -300,17 +300,21 @@
   /* ---------------------------------------------------------------
      Marquise infinita
      --------------------------------------------------------------- */
-  var trilho = doc.getElementById("marquise-trilho");
-
-  if (trilho && !calmo) {
+  /* A copia e o que fecha o laco: quando a trilha anda metade da propria
+     largura, a copia esta exatamente onde o original comecou. */
+  function girar(trilho, velocidade) {
+    if (!trilho || calmo) return;
     Array.prototype.slice.call(trilho.children).forEach(function (item) {
       var copia = item.cloneNode(true);
       copia.setAttribute("aria-hidden", "true");
       trilho.appendChild(copia);
     });
     var largura = trilho.scrollWidth / 2;
-    trilho.style.setProperty("--duracao", Math.round(largura / 60) + "s");
+    trilho.style.setProperty("--duracao", Math.round(largura / velocidade) + "s");
   }
+
+  girar(doc.getElementById("marquise-trilho"), 60);
+  girar(doc.getElementById("trilho-clientes"), 46);
 
   /* --- Ano do rodapé --------------------------------------------- */
   var ano = doc.getElementById("ano");

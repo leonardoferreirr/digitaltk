@@ -16,15 +16,48 @@
   isolation: isolate;
 }
 
+/* Foto do escritorio sob um degrade forte, como no hero da landing page. */
+.hero__foto {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+
+.hero__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.hero__veu {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+      100deg,
+      rgba(6, 6, 6, 0.97) 0%,
+      rgba(6, 6, 6, 0.9) 38%,
+      rgba(6, 6, 6, 0.62) 68%,
+      rgba(6, 6, 6, 0.42) 100%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 82% 30%,
+      rgba(255, 204, 0, 0.16),
+      transparent 62%
+    );
+}
+
 /* Malha de pontos que respira atras do titulo. */
 .hero__malha {
   position: absolute;
   inset: -20% -10% auto;
   height: 130%;
-  z-index: -2;
+  z-index: -1;
   background-image: radial-gradient(
     circle at center,
-    rgba(255, 204, 0, 0.42) 1px,
+    rgba(255, 204, 0, 0.3) 1px,
     transparent 1.4px
   );
   background-size: 30px 30px;
@@ -52,7 +85,7 @@
   width: min(900px, 90vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  z-index: -3;
+  z-index: -4;
   background: radial-gradient(
     circle,
     rgba(255, 204, 0, 0.14),
@@ -67,7 +100,7 @@
 }
 
 .hero h1 {
-  max-width: 17ch;
+  max-width: 19ch;
 }
 
 .hero__texto {
@@ -94,8 +127,9 @@
 
 .dado__n {
   display: block;
+  font-family: var(--titulo);
   font-size: clamp(1.9rem, 1.3rem + 1.8vw, 2.7rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--amarelo);
@@ -135,9 +169,16 @@
   top: calc(var(--alt-topo) + 3.5rem);
 }
 
+/* Cada cartao gruda no topo e o proximo sobe por cima, deixando so uma
+   faixa do anterior a mostra. O recuo cresce com o indice. */
 .pilha {
   display: grid;
   gap: 1.15rem;
+}
+
+.pilha .cartao {
+  position: sticky;
+  top: calc(var(--alt-topo) + 1.6rem + var(--i, 0) * 16px);
 }
 
 /* Cada frente tem a sua cor. O amarelo da marca fica com a primeira; as
@@ -157,7 +198,8 @@
   border: 1px solid var(--borda);
   border-radius: 18px;
   overflow: hidden;
-  transition: transform 0.55s var(--curva), box-shadow 0.55s var(--curva);
+  box-shadow: 0 -18px 40px -26px rgba(0, 0, 0, 0.85);
+  transition: box-shadow 0.55s var(--curva);
 }
 
 .cartao--amarelo {
@@ -205,8 +247,7 @@
 }
 
 .cartao:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 60px -30px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 28px 60px -28px rgba(0, 0, 0, 0.9);
 }
 
 .cartao:hover::after {
@@ -330,6 +371,31 @@
   margin-top: 1.1rem;
 }
 
+/* --- Selo de parceiro do Google ------------------------------------- */
+
+.selo-google {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2.2rem;
+  padding: 0.75rem 1.25rem 0.75rem 0.9rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.selo-google svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
+.selo-google span {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
 /* --- Faixa do Google Partner --------------------------------------- */
 
 .parceiro {
@@ -410,33 +476,17 @@
 
 /* --- Clientes -------------------------------------------------------- */
 
-.clientes__grade {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1px;
-  background: var(--linha-2);
-  border: 1px solid var(--linha-2);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
 .cliente {
   display: grid;
   place-content: center;
-  padding: 2rem 1.4rem;
-  background: var(--preto);
-  min-height: 118px;
-  transition: background-color 0.4s;
-}
-
-.cliente:hover {
-  background: var(--carvao-2);
+  flex: none;
+  padding: 0 1rem;
 }
 
 /* As logos vieram do site antigo em cores variadas; o branco unifica
    e a cor volta no hover. */
 .cliente img {
-  max-height: 46px;
+  max-height: 44px;
   width: auto;
   filter: brightness(0) invert(1);
   opacity: 0.55;

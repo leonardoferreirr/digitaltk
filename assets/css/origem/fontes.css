@@ -1,4 +1,11 @@
 @font-face {
+  font-family: 'Cocogoose';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/cocogoose-bold.woff2) format('woff2');
+}
+@font-face {
   font-family: 'Archivo';
   font-style: normal;
   font-weight: 400;

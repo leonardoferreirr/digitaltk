@@ -49,6 +49,9 @@ direto não adianta**, o próximo build sobrescreve.
 - **A logo do cabeçalho é uma máscara CSS**, não uma imagem colorida. O lockup
   original é preto sobre transparente; como máscara ele vira a forma e toma a
   cor da marca, em vez de sumir no fundo escuro.
+- **Os cartões de serviço empilham por `position: sticky`**, não por JS. Cada
+  um gruda no topo com um recuo que cresce pelo índice (`--i`), então o
+  seguinte sobe por cima deixando à mostra só a faixa colorida do anterior.
 - **O título quebra em linhas no JS**, depois que a fonte carrega, para cada
   linha subir de dentro da própria máscara. Medir antes da fonte assentar
   agrupa as palavras errado.
@@ -64,8 +67,12 @@ direto não adianta**, o próximo build sobrescreve.
   mas não há para onde enviar: o `data-destino` do `<form>` está como
   `[A PREENCHER]` e, enquanto estiver assim, a página diz isso ao visitante em
   vez de fingir que enviou.
-- **Fonte da marca.** O site usa Archivo. A Cocogoose que aparecia no material
-  antigo é versão trial e não pode ir para produção sem licença.
+- **Licença da Cocogoose.** Os títulos usam Cocogoose Pro, a fonte da marca,
+  convertida dos TTF que estavam em `~/Downloads/digital tk/cocogoose/`. Os
+  arquivos são a versão **trial**, sob licença CC BY-NC, que cobre uso não
+  comercial. O site de uma agência é uso comercial, então a licença precisa
+  ser comprada na Zetafonts antes de ir ao ar em definitivo. O corpo do texto
+  segue em Archivo.
 
 ## Notas sobre o material recebido
 
